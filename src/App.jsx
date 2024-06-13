@@ -19,7 +19,6 @@ const App = () => {
 
   const handleLogin = (username, password) => {
     setIsLoggedIn(true);
-    localStorage.setItem('isLoggedIn', 'true');
   };
 
   const handleLogout = () => {

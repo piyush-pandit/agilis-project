@@ -42,7 +42,10 @@ const Login = ({ onLogin }) => {
       
       if (response?.status === 200) {
         console.log("inside if",response)
-        localStorage.setItem("accessToken", response?.data?.data?.token)
+        const accessToken = response?.data?.token
+        console.log(accessToken)
+        localStorage.setItem("accessToken", accessToken)
+        localStorage.setItem("isLoggedIn", true)
         navigate("/products")
       } 
     } catch (error) {
@@ -107,7 +110,6 @@ const Login = ({ onLogin }) => {
               className={`form-control ${errors.password ? 'is-invalid' : ''}`}
               id="password"
               value={password}
-              // minLength={8}
               onChange={(e) => {
                 setPassword(e.target.value);
                 validateField('password', e.target.value);
