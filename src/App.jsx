@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { FaPowerOff } from 'react-icons/fa';
-import LoginComponent from './login/LoginComponent';
-import ProductList from './product/ProductList';
+import LoginComponent from './pages/Login';
+import ProductList from './component/product/ProductList';
 import dummyData from './dumyData.json';
-import Logout from './logout/LogoutComponent';
+// import Logout from './logout/LogoutComponent';
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -53,7 +53,7 @@ const App = () => {
               )
             }
           />
-          <Route path="/logout" element={<Logout onLogout={handleLogout} />} />
+          {/* <Route path="/logout" element={<Logout onLogout={handleLogout} />} /> */}
         </Routes>
       </div>
     </Router>

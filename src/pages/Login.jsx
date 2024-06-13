@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+import ApiCaller from '../services/apiService';
+import { useNavigate } from 'react-router-dom';
+const apiService = ApiCaller();
 
 const Login = ({ onLogin }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const [username, setUsername] = useState('emilys');
+  const [password, setPassword] = useState('emilyspass');
   const [errors, setErrors] = useState({});
 
   const validateField = (name, value) => {
@@ -18,12 +22,32 @@ const Login = ({ onLogin }) => {
     } else if (name === 'password') {
       if (!value) {
         error = 'Password is required';
-      } else if (value.length !== 8) {
-        error = 'Password must be exactly 8 characters long';
+      } else if (value.length <= 8) {
+        error = 'Password must be more than 8 characters long';
       }
     }
 
     setErrors((prevErrors) => ({ ...prevErrors, [name]: error }));
+  };
+
+  const loginData = async () => {
+    try {
+      const url = "https://dummyjson.com/auth/login";
+      const formData = new FormData();
+      formData.append('username', username);
+      formData.append('password', password);
+
+      const response = await apiService.apiCall("post", url, formData);
+      console.log("response::", response)
+      
+      if (response?.status === 200) {
+        console.log("inside if",response)
+        localStorage.setItem("accessToken", response?.data?.data?.token)
+        navigate("/products")
+      } 
+    } catch (error) {
+      console.log("login error:", error);
+    }
   };
 
   const validateForm = () => {
@@ -38,8 +62,8 @@ const Login = ({ onLogin }) => {
 
     if (!password) {
       newErrors.password = 'Password is required';
-    } else if (password.length !== 8) {
-      newErrors.password = 'Password must be exactly 8 characters long';
+    } else if (password.length <= 8) {
+      newErrors.password = 'Password must be more than 8 characters long';
     }
 
     setErrors(newErrors);
@@ -48,7 +72,7 @@ const Login = ({ onLogin }) => {
 
   const handleLogin = () => {
     if (validateForm()) {
-      onLogin(username, password);
+      loginData();
     }
   };
 
@@ -83,7 +107,7 @@ const Login = ({ onLogin }) => {
               className={`form-control ${errors.password ? 'is-invalid' : ''}`}
               id="password"
               value={password}
-              maxLength={8}
+              // minLength={8}
               onChange={(e) => {
                 setPassword(e.target.value);
                 validateField('password', e.target.value);
