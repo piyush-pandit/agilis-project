@@ -31,25 +31,27 @@ const Login = ({ onLogin }) => {
   };
 
   const loginData = async () => {
-    try {
-      const url = "https://dummyjson.com/auth/login";
-      const formData = new FormData();
-      formData.append('username', username);
-      formData.append('password', password);
-
-      const response = await apiService.apiCall("post", url, formData);
-      console.log("response::", response)
-      
-      if (response?.status === 200) {
-        console.log("inside if",response)
-        const accessToken = response?.data?.token
-        console.log(accessToken)
-        localStorage.setItem("accessToken", accessToken)
-        localStorage.setItem("isLoggedIn", true)
-        navigate("/products")
-      } 
-    } catch (error) {
-      console.log("login error:", error);
+    if (validateForm()) {
+      try {
+        const url = "https://dummyjson.com/auth/login";
+        const formData = new FormData();
+        formData.append('username', username);
+        formData.append('password', password);
+  
+        const response = await apiService.apiCall("post", url, formData);
+        console.log("response::", response)
+        
+        if (response?.status === 200) {
+          console.log("inside if",response)
+          const accessToken = response?.data?.token
+          console.log(accessToken)
+          localStorage.setItem("accessToken", accessToken)
+          localStorage.setItem("isLoggedIn", true)
+          navigate("/products")
+        } 
+      } catch (error) {
+        console.log("login error:", error);
+      }
     }
   };
 
@@ -71,12 +73,6 @@ const Login = ({ onLogin }) => {
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  };
-
-  const handleLogin = () => {
-    if (validateForm()) {
-      loginData();
-    }
   };
 
   return (
@@ -119,7 +115,7 @@ const Login = ({ onLogin }) => {
             {errors.password && <div className="invalid-feedback">{errors.password}</div>}
           </div>
           <div className="mt-3 text-center">
-            <button type="button" className="btn btn-success btn-md btn-block" onClick={handleLogin}>
+            <button type="button" className="btn btn-success btn-md btn-block" onClick={loginData}>
               Login
             </button>
           </div>
