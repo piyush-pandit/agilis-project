@@ -4,8 +4,10 @@ const ProductCard = ({ product }) => {
   return (
     <div className="card mb-3">
       <div className="card-header text-end">${product.price}</div>
-      <img src={product.image} className="card-img-top mx-auto" alt={product.name} />
-      <div className="card-body">
+      <div className='py-3 px-3 text-center'>
+        <img src={product.image} className="card-img-top mx-auto" style={{ height: '200px', width: '200px' }}  alt={product.name} />
+      </div>
+      <div className="card-body px-3 py-3">
         <h5 className="card-title">{product.name}</h5>
         <p className="card-text">{product.description}</p>
         <button className="btn btn-primary">Add to Cart</button>

@@ -5,35 +5,35 @@
         "name": "Product 1",
         "description": "Description for Product 1",
         "price": 10,
-        "image": "https://via.placeholder.com/150"
+        "image": "https://m.media-amazon.com/images/I/51owL5zRgUL._AC_UF1000,1000_QL80_.jpg"
       },
       {
         "id": 2,
         "name": "Product 2",
         "description": "Description for Product 2",
         "price": 20,
-        "image": "https://via.placeholder.com/150"
+        "image": "https://images-cdn.ubuy.co.in/65285d97299fcd23a138aa54-blissmile-just-water-baby-wipes-100.jpg"
       },
       {
         "id": 3,
         "name": "Product 3",
         "description": "Description for Product 3",
         "price": 30,
-        "image": "https://via.placeholder.com/150"
+        "image": "https://www.henryschein.com/Products/6655214_US_Front_01_600x600.jpg"
       },
       {
         "id": 4,
         "name": "Product 4",
         "description": "Description for Product 4",
         "price": 40,
-        "image": "https://via.placeholder.com/150"
+        "image": "https://www.lakmeindia.com/cdn/shop/files/VBCOMBO2_OilySkin.jpg?v=1717070634"
       },
       {
         "id": 5,
         "name": "Product 5",
         "description": "Description for Product 5",
         "price": 50,
-        "image": "https://via.placeholder.com/150"
+        "image": "https://www.kroger.com/product/images/large/front/1073291313730"
       }
     ]
   }
