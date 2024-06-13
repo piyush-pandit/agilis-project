@@ -10,7 +10,7 @@ const ProductCard = ({ product }) => {
       <div className="card-body px-3 py-3">
         <h5 className="card-title">{product.name}</h5>
         <p className="card-text">{product.description}</p>
-        <button className="btn btn-primary">Add to Cart</button>
+        <button className="btn btn-primary add__cart">Add to Cart</button>
       </div>
     </div>
   );

@@ -34,7 +34,22 @@
         "description": "Description for Product 5",
         "price": 50,
         "image": "https://www.kroger.com/product/images/large/front/1073291313730"
+      },
+      {
+        "id": 5,
+        "name": "Product 5",
+        "description": "Description for Product 5",
+        "price": 50,
+        "image": "https://images.mamaearth.in/catalog/product/r/i/rice-fw-1.jpg?format=auto&height=600"
+      },
+      {
+        "id": 5,
+        "name": "Product 5",
+        "description": "Description for Product 5",
+        "price": 50,
+        "image": "https://m.media-amazon.com/images/I/71T-9QNellL.jpg"
       }
     ]
   }
   
+
