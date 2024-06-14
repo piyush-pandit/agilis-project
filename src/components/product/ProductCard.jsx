@@ -29,7 +29,9 @@ const ProductCard = () => {
 
   useEffect(() => {
     getProductData(skip);
+    // eslint-disable-next-line
   }, [skip]);
+  
 
   const handleScroll = () => {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500 && products.length < total && !loading) {
@@ -40,6 +42,7 @@ const ProductCard = () => {
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+    // eslint-disable-next-line
   }, [products, total, loading]);
 
   const addToCart = (product) => {
