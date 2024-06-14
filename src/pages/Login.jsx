@@ -3,10 +3,10 @@ import ApiCaller from '../services/apiService';
 import { useNavigate } from 'react-router-dom';
 const apiService = ApiCaller();
 
-const Login = ({ onLogin }) => {
+const Login = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = useState('emilys');
-  const [password, setPassword] = useState('emilyspass');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
 
   const validateField = (name, value) => {
@@ -49,7 +49,9 @@ const Login = ({ onLogin }) => {
           localStorage.setItem("isLoggedIn", true)
           navigate("/products")
           window.dispatchEvent(new Event("storage"));
-        } 
+        } else {
+          alert(response?.data?.message)
+        }
       } catch (error) {
         console.log("login error:", error);
       }
