@@ -10,7 +10,7 @@ const Cart = () => {
   }, []);
 
   return (
-    <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 pt-5 mt-2 vh-100">
       {cart.length > 0 ? cart.map((product, index) => (
         <div key={index} className="col">
           <div className="card">

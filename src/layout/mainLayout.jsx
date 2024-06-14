@@ -27,7 +27,7 @@ const MainLayout = ({ children }) => {
           <Header />
         </div>
       )}
-      <main className='container max-auto p-4'>
+      <main className='container max-auto p-4 full-height'>
         {children}
       </main>
     </>

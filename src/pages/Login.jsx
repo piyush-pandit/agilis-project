@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ApiCaller from '../services/apiService';
 import { useNavigate } from 'react-router-dom';
 const apiService = ApiCaller();
@@ -76,51 +76,60 @@ const Login = ({ onLogin }) => {
     return Object.keys(newErrors).length === 0;
   };
 
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
+
   return (
     <>
-      <div className="card mx-auto mt-5" style={{ width: '18rem' }}>
-        <div className="card-body">
-          <h2 className="card-title text-center">Login</h2>
-          <div className="mb-3">
-            <label htmlFor="username" className="form-label">
-              Username <span style={{ color: 'red' }}>*</span>
-            </label>
-            <input
-              type="text"
-              className={`form-control ${errors.username ? 'is-invalid' : ''}`}
-              id="username"
-              value={username}
-              placeholder='Enter User Name'
-              onChange={(e) => {
-                setUsername(e.target.value);
-                validateField('username', e.target.value);
-              }}
-              onBlur={(e) => validateField('username', e.target.value)}
-            />
-            {errors.username && <div className="invalid-feedback">{errors.username}</div>}
-          </div>
-          <div className="mb-3">
-            <label htmlFor="password" className="form-label">
-              Password <span style={{ color: 'red' }}>*</span>
-            </label>
-            <input
-              type="password"
-              className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-              id="password"
-              value={password}
-              placeholder='Enter Password'
-              onChange={(e) => {
-                setPassword(e.target.value);
-                validateField('password', e.target.value);
-              }}
-              onBlur={(e) => validateField('password', e.target.value)}
-            />
-            {errors.password && <div className="invalid-feedback">{errors.password}</div>}
-          </div>
-          <div className="mt-3 text-center">
-            <button type="button" className="btn btn-success btn-md btn-block" onClick={loginData}>
-              Login
-            </button>
+      <div className="d-flex align-items-center justify-content-center vh-100">
+        <div className="card" style={{ maxWidth: '500px', width: '100%', padding: '50px', borderRadius: '20px' }}>
+          <div className="card-body">
+            <h1 className="card-title text-center">Login</h1>
+            <div className="mb-3">
+              <label htmlFor="username" className="form-label">
+                Username <span style={{ color: 'red' }}>*</span>
+              </label>
+              <input
+                type="text"
+                className={`form-control ${errors.username ? 'is-invalid' : ''}`}
+                id="username"
+                value={username}
+                placeholder='Enter User Name'
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                  validateField('username', e.target.value);
+                }}
+                onBlur={(e) => validateField('username', e.target.value)}
+              />
+              {errors.username && <div className="invalid-feedback">{errors.username}</div>}
+            </div>
+            <div className="mb-3">
+              <label htmlFor="password" className="form-label">
+                Password <span style={{ color: 'red' }}>*</span>
+              </label>
+              <input
+                type="password"
+                className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                id="password"
+                value={password}
+                placeholder='Enter Password'
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  validateField('password', e.target.value);
+                }}
+                onBlur={(e) => validateField('password', e.target.value)}
+              />
+              {errors.password && <div className="invalid-feedback">{errors.password}</div>}
+            </div>
+            <div className="mt-3 text-center">
+              <button type="button" className="btn btn-success btn-lg btn-block px-5 my-3" onClick={loginData}>
+                Login
+              </button>
+            </div>
           </div>
         </div>
       </div>
