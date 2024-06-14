@@ -48,6 +48,7 @@ const Login = ({ onLogin }) => {
           localStorage.setItem("accessToken", accessToken)
           localStorage.setItem("isLoggedIn", true)
           navigate("/products")
+          window.dispatchEvent(new Event("storage"));
         } 
       } catch (error) {
         console.log("login error:", error);
@@ -89,6 +90,7 @@ const Login = ({ onLogin }) => {
               className={`form-control ${errors.username ? 'is-invalid' : ''}`}
               id="username"
               value={username}
+              placeholder='Enter User Name'
               onChange={(e) => {
                 setUsername(e.target.value);
                 validateField('username', e.target.value);
@@ -106,6 +108,7 @@ const Login = ({ onLogin }) => {
               className={`form-control ${errors.password ? 'is-invalid' : ''}`}
               id="password"
               value={password}
+              placeholder='Enter Password'
               onChange={(e) => {
                 setPassword(e.target.value);
                 validateField('password', e.target.value);

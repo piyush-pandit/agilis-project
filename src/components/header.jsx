@@ -8,7 +8,7 @@ const Header = () => {
     <header className="header">
       <div className="leftContainer">
       <Link to="/products" className="icon">
-      <h1 className="title">My Product</h1>
+      <h1 className="title">Agilis Product</h1>
         </Link>
         
       </div>

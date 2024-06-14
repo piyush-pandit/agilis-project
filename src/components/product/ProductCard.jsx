@@ -7,13 +7,13 @@ const ProductCard = () => {
   const [skip, setSkip] = useState(0);
   const [total, setTotal] = useState(0);
   const limit = 10;
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
-  const getProductData = async () => {
+  const getProductData = async (newSkip) => {
     if (loading) return;
     setLoading(true);
     try {
-      const productUrl = `https://dummyjson.com/products?limit=${limit}&skip=${skip}`;
+      const productUrl = `https://dummyjson.com/products?limit=${limit}&skip=${newSkip}`;
       const response = await apiService.apiCall("get", productUrl);
       const newProducts = response.data.products;
       setProducts(prevProducts => [...prevProducts, ...newProducts]);
@@ -21,34 +21,33 @@ const ProductCard = () => {
     } catch (error) {
       console.log("product error", error);
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    getProductData();
+    getProductData(skip);
   }, [skip]);
 
   const handleScroll = () => {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500 && products.length < total && !loading) {
-      console.log("limit1", limit)
-      setSkip(limit + 10);
+      setSkip(prevSkip => prevSkip + limit);
     }
   };
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [products, total]);
+  }, [products, total, loading]);
 
   return (
     <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
       {products?.map((product, index) => (
         <div key={index} className="col">
           <div className="card">
-            <div className="card-header text-end">${product.price}</div>
-            <div className='py-3 px-3 text-center' style={{ maxHeight: '300px', overflow: 'hidden' }}>
-              <img src={product.thumbnail} className="card-img-top mx-auto img-fluid" alt={product.title} style={{ maxHeight: '100%', width: '100%', objectFit: 'contain' }} />
+            <h4 className="card-header text-end">${product.price}</h4>
+            <div className='py-3 px-3 text-center'style={{ height: '200px', overflow: 'hidden' }}>
+              <img src={product.thumbnail} className="card-img-top mx-auto img-fluid" alt={product.title} style={{ height: '100%', width: 'auto', objectFit: 'contain' }} />
             </div>
             <div className="card-body px-3 py-3">
               <h5 className="card-title">{product.title}</h5>
