@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ApiCaller from '../../services/apiService';
+import '../../styles/Product.css'
 const apiService = ApiCaller();
 
 const ProductCard = () => {
