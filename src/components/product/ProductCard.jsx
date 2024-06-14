@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import ApiCaller from '../../services/apiService';
 import '../../styles/Product.css';
 
@@ -11,7 +11,7 @@ const ProductCard = () => {
   const limit = 10;
   const [loading, setLoading] = useState(false);
 
-  const getProductData = async (newSkip) => {
+  const getProductData = useCallback(async (newSkip) => {
     if (loading) return;
     setLoading(true);
     try {
@@ -25,25 +25,22 @@ const ProductCard = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [loading]);
 
   useEffect(() => {
     getProductData(skip);
-    // eslint-disable-next-line
-  }, [skip]);
-  
+  }, [skip, getProductData]);
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500 && products.length < total && !loading) {
       setSkip(prevSkip => prevSkip + limit);
     }
-  };
+  }, [products, total, loading]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-    // eslint-disable-next-line
-  }, [products, total, loading]);
+  }, [handleScroll]);
 
   const addToCart = (product) => {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
