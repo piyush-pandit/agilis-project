@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ApiCaller from '../../services/apiService';
-import '../../styles/Product.css'
+import '../../styles/Product.css';
+
 const apiService = ApiCaller();
 
 const ProductCard = () => {
@@ -41,19 +42,26 @@ const ProductCard = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [products, total, loading]);
 
+  const addToCart = (product) => {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.push(product);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    window.dispatchEvent(new Event('storage'));
+  };
+
   return (
     <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
       {products?.map((product, index) => (
         <div key={index} className="col">
           <div className="card">
             <h4 className="card-header text-end">${product.price}</h4>
-            <div className='py-3 px-3 text-center'style={{ height: '200px', overflow: 'hidden' }}>
+            <div className='py-3 px-3 text-center' style={{ height: '200px', overflow: 'hidden' }}>
               <img src={product.thumbnail} className="card-img-top mx-auto img-fluid" alt={product.title} style={{ height: '100%', width: 'auto', objectFit: 'contain' }} />
             </div>
             <div className="card-body px-3 py-3">
               <h5 className="card-title">{product.title}</h5>
               <p className="card-text">{product.description}</p>
-              <button className="btn btn-primary add__cart">Add to Cart</button>
+              <button className="btn btn-primary add__cart" onClick={() => addToCart(product)}>Add to Cart</button>
             </div>
           </div>
         </div>

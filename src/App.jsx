@@ -10,6 +10,7 @@ import Products from "./components/product/ProductCard";
 import ProtectedRoute from "./components/protectedRoute";
 import MainLayout from "./layout/mainLayout";
 import Logout from "./components/logout";
+import Cart from './components/cart'
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/" element={<Navigate to="/products" />} />
           <Route path="/products" element={<ProtectedRoute />}>
             <Route index element={<Products />} />
+            <Route index element={<Cart />} />
           </Route>
         </Routes>
       </MainLayout>
